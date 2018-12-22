@@ -1,0 +1,66 @@
+ <div class="container">
+  <h1>Add Task</h1>
+  <form >
+    <div class="row">
+      <label for="task"  class="col-sm-3 col-md-3 col-lg-3 col-xs-3" >Task</label>
+      <input type="text" class="col-sm-3 col-md-3 col-lg-3 col-xs-3" [(ngModel)]="task.task"  name="task" id="task" required >
+      <!-- <span class="col-sm-3 col-md-3 col-lg-3 col-xs-3" style="color:red;" ng-show="$submitted && task.$error">
+        <span ng-show="task.$error.task">Task is required.</span>
+      </span> -->
+      <!--  <span class="col-sm-3 col-md-3 col-lg-3 col-xs-3" style="color:red;"[(ngModel)]="task.errorMessages" name="errorMessages" id="errorMessages" >
+ 
+       </span> -->
+      <div ng-messages="task.errorMessages" class="col-sm-3 col-md-2 col-lg-3 col-xs-3" style="color:red;" role="alert">
+        {{task.errorTask}}
+      </div>
+    </div>
+    
+    <br>
+    <div class="row">
+        <label for="task"  class="col-sm-3 col-md-3 col-lg-3 col-xs-3">Priority</label>
+        <input type="range" class="col-sm-3 col-md-3 col-lg-3 col-xs-3" [(ngModel)]="task.priority" title="{{task.priority}}" name="priority" id="priority" required>
+    </div>
+      <br>
+    <div class="row">
+      <label for="parentTask" class="col-sm-3 col-md-3 col-lg-3 col-xs-3">Parent Task</label>
+      <input type="text" class="col-sm-3 col-md-3 col-lg-3 col-xs-3" [(ngModel)]="task.parentTask"   name="task.parentTask" id="task.parentTask" required>
+      <div ng-messages="task.errorMessages" class="col-sm-3 col-md-2 col-lg-3 col-xs-3" style="color:red;" role="alert">
+          {{task.errorParentTask}}
+        </div>
+    </div>
+    <br>
+    <div class="row">
+      <label for="startDate" class="col-sm-3 col-md-3 col-lg-3 col-xs-3">Start Date</label>
+          <!-- <input matInput [matDatepicker]="picker"  required placeholder="Choose a date" [(ngModel)]="task.startDate" name="startDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker> -->
+          <input type="date" class="col-sm-3 col-md-3 col-lg-3 col-xs-3" [(ngModel)]="task.startDate" (blur)="compareTwoDates(task.startDate,task.endDate)"  name="startDate" id="startDate" required>
+          <div ng-messages="task.errorMessages" class="col-sm-3 col-md-2 col-lg-3 col-xs-3" style="color:red;" role="alert">
+              {{task.errorDate}}
+            </div>
+   </div>
+   <br>
+  <div class="row">
+    <label for="endDate" class="col-sm-3 col-md-3 col-lg-3 col-xs-3">End Date</label>
+    <!-- <input matInput [matDatepicker]="endDatePicker" required   placeholder="Choose a date" [(ngModel)]="task.endDate" name="endDate">
+    <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #endDatePicker></mat-datepicker> -->
+    <input type="date" class="col-sm-3 col-md-3 col-lg-3 col-xs-3" [(ngModel)]="task.endDate" (blur)="compareTwoDates(task.startDate,task.endDate)"  name="endDate" id="endDate" required>
+    <div ng-messages="task.errorMessages" class="col-sm-3 col-md-2 col-lg-3 col-xs-3" style="color:red;" role="alert">
+        {{task.errorDate}}
+      </div>
+  </div>
+  <div *ngIf="error.isError" class="alert alert-danger">
+      {{ error.errorMessage }}
+   </div>
+   <div ng-messages="task.errorMessages" class="col-sm-3 col-md-2 col-lg-3 col-xs-3" style="color:red;" role="alert">
+      {{task.errorMessages}}
+    </div>
+  <div class="col-sm-3 col-md-3 col-lg-9 col-xs-3">
+  <br>
+    <button type="submit" class="btn btn-success" (click)="addTask()">Add Task</button> 
+     <button type="reset" class="btn btn-success">Reset</button>
+    <br>
+  </div>
+  </form>
+</div>

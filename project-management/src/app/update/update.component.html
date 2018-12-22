@@ -1,0 +1,37 @@
+<div class="container">
+    <h1>Add Task</h1>
+    <form >
+      <div class="row">
+        <label for="task"  class="col-sm-3 col-md-3 col-lg-3 col-xs-3" >Task</label>
+        <input type="text" class="col-sm-3 col-md-3 col-lg-3 col-xs-3" [(ngModel)]="task.task"  name="task" id="task" required >
+      </div>
+      <br>
+      <div class="row">
+          <label for="task"  class="col-sm-3 col-md-3 col-lg-3 col-xs-3">Priority</label>
+          <input type="range" class="col-sm-3 col-md-3 col-lg-3 col-xs-3" [(ngModel)]="task.priority" title="{{task.priority}}" name="priority" id="priority" required>
+      </div>
+        <br>
+      <div class="row">
+        <label for="parentTask" class="col-sm-3 col-md-3 col-lg-3 col-xs-3">Parent Task</label>
+        <input type="text" class="col-sm-3 col-md-3 col-lg-3 col-xs-3" [(ngModel)]="task.parentTask"   name="parentTask" id="parentTask" required>
+      </div>
+      <br>
+      <div class="row">
+        <label for="startDate" class="col-sm-3 col-md-3 col-lg-3 col-xs-3">Start Date</label>
+        <input type="date" class="col-sm-3 col-md-3 col-lg-3 col-xs-3" [(ngModel)]="task.startDate"   name="startDate" id="startDate" required>
+     </div>
+     <br>
+    <div class="row">
+      <label for="endDate" class="col-sm-3 col-md-3 col-lg-3 col-xs-3">End Date</label>
+      <input type="date" class="col-sm-3 col-md-3 col-lg-3 col-xs-3" [(ngModel)]="task.endDate"   name="endDate" id="endDate" required>
+   
+    </div>
+    <div class="col-sm-3 col-md-3 col-lg-9 col-xs-3">
+    <br>
+      <button type="submit" class="btn btn-success" (click)="updateTask(task,task.taskId)">Update Task</button> 
+       <button type="reset" class="btn btn-success">Cancel</button>
+      <br>
+    </div>
+    </form>
+  </div>
+  

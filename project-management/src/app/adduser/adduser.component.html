@@ -1,0 +1,121 @@
+<div class="container">
+    <!-- <div class="row">
+  <h4>Add User</h4>
+  </div> -->
+  <form>
+    <div class="row">
+      <label for="firstName"  class="col-sm-3 col-md-3 col-lg-3 col-xs-3" >First Name</label>
+      <input type="text" class="col-sm-3 col-md-3 col-lg-3 col-xs-3" [(ngModel)]="user.firstName"  name="firstName" id="firstName" required >
+      
+      <div ng-messages="user.errorMessages" class="col-sm-3 col-md-2 col-lg-3 col-xs-3" style="color:red;" role="alert">
+        {{user.errorFirstName}}
+      </div>
+    </div>
+    
+    <br>
+      
+    <div class="row">
+      <label for="lastName" class="col-sm-3 col-md-3 col-lg-3 col-xs-3">Last Name</label>
+      <input type="text" class="col-sm-3 col-md-3 col-lg-3 col-xs-3" [(ngModel)]="user.lastName"   name="lastName" id="lastName" required>
+      <div ng-messages="user.errorMessages" class="col-sm-3 col-md-2 col-lg-3 col-xs-3" style="color:red;" role="alert">
+          {{user.errorLastName}}
+        </div>
+    </div>
+ 
+    <br>
+  <div class="row">
+    <label for="employeeId" class="col-sm-3 col-md-3 col-lg-3 col-xs-3">Employee Id</label>
+    <input type="text" class="col-sm-3 col-md-3 col-lg-3 col-xs-3" [(ngModel)]="user.employeeId"   name="employeeId" id="employeeId" required>
+    <div ng-messages="user.errorMessages" class="col-sm-3 col-md-2 col-lg-3 col-xs-3" style="color:red;" role="alert">
+        {{user.errorEmployeeId}}
+      </div>
+  </div>
+ 
+  <div class="col-sm-3 col-md-3 col-lg-9 col-xs-3">
+  <br>
+    <button type="submit" class="btn btn-success" (click)="addUser()">Add</button> 
+     <button type="reset" class="btn btn-success">Reset</button>
+    <br>
+  </div>
+
+  <hr>
+
+  <form #viewUsersForm="ngForm" novalidate >
+      <div class="container">
+      <div class="row">
+      <div class="form-group row">
+          <div class="col-sm-2">
+              <input type="text" class="form-control" id="searchText" name="searchText" #searchProjects="ngModel" [(ngModel)]="searchText" placeholder="Search User">
+          </div>
+          <div class="col-sm-2">
+              <label class="col-form-label">Sort:</label>
+          </div>
+          <div class="col-sm-2">
+              <button type="button" class="btn btn-secondary" (click)=sortByFirstName()>First Name</button>
+          </div>
+          <div class="col-sm-2">
+              <button type="button" class="btn btn-secondary" (click)=sortByLastName()>Last Name</button>
+          </div>
+          <div class="col-sm-2">
+              <button type="button" class="btn btn-secondary" (click)=sortByEmployeeId()>Employee Id</button>
+          </div>
+          <div class="col-sm-2">
+
+          </div>
+          <div class="col-sm-2">
+
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-sm-2"></div>
+      <div class="list-group col-md-12">
+        
+          <div class="row list-group-item" *ngFor="let item of userList | UserFilter : searchText">
+              
+              <div class="col-sm-12" style="background-color: rgb(228, 224, 224);"  >
+                  <br/><strong>
+                  <span class="col-form-label">Employee Id: {{item.employeeId}}</span><br/>
+                  <span class="col-form-label">First Name: {{item.firstName}}</span><br/>
+                  <span class="col-form-label">Last Name: {{item.lastName}}</span><br/><br/>
+                </strong>
+              </div>
+              <div class="col-md-3">
+                      <div *ngIf="item.status === 'A'">
+                          <span><button type="button" class="btn btn-info" (click)=editUser(item)>Edit User</button></span><br/> <br/>
+                          <span><button type="button" class="btn btn-secondary" style="margin:top" (click)=deleteUser(item)>Delete User</button></span>
+                      </div>
+              </div>
+          </div>
+        </div>
+      </div>
+</div>
+      </div>
+  </form>
+
+<!-- <div>
+    <div class="row">
+        <input type="text" class="col-sm-3 col-md-3 col-lg-3 col-xs-3" [(ngModel)]="user.searchText"  name="searchText" id="searchText" >
+    </div>
+  <div *ngFor="let user of userList | filter : 'firstName' : user.firstName | filter : 'lastName' : user.lastName  
+  | filter : 'employeeId' : user.employeeId  | filter : 'searchText' : user.searchText ; let i = index">
+ 
+  <div class="row">
+      <div class="col-md-2">{{user.firstName}}</div>
+      <button type="submit" class="btn btn-success" (click)="editUser()">Edit</button> 
+  </div>
+      <div class="row">
+          <div class="col-md-2">{{user.lastName}}</div>
+          <button type="submit" class="btn btn-success" (click)="deleteUser()">Delete</button> 
+        </div>
+        <div class="row">
+            <div class="col-md-2">{{user.employeeId}}</div>
+          </div> 
+          <hr>  
+</div> 
+  
+     
+</div> -->
+ 
+  </form>
+</div>
+ 
