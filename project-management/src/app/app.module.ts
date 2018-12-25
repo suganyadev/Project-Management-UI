@@ -23,6 +23,7 @@ import {ProjectService} from './services/project.service';
 import {UserService} from './services/user.service';
 import {ProjectPipe} from './project/project.pipe';
 import {NgbdModalFocus} from './project/model.focus';
+import {EditTaskService} from './services/edittask.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +51,7 @@ import {NgbdModalFocus} from './project/model.focus';
     
   ],
   exports:[TaskPipe,SearchPipe,UserPipe,ProjectPipe],
-  providers: [TaskService,ProjectService,UserService,DatePipe],
+  providers: [EditTaskService,TaskService,ProjectService,UserService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

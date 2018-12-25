@@ -17,5 +17,10 @@ export class Task {
     public errorTask: string;
     public errorParentTask: string;
     public errorDate: string;
+    public userId: number;
+    public isParentTask: boolean;
+    public projectName:String;
+    public firstName: String;
+    public lastName: String;
 
 }

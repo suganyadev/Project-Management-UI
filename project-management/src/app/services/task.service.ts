@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import { Task } from '../addtask/task';
 import { User } from '../addUser/user';
+import {ParentTask} from '../addtask/parenttask';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -10,8 +11,7 @@ const httpOptions = {
 
 @Injectable()
 export class TaskService {
-  editTask:Task;
-  //private userUrl = 'http://localhost:8080/user-portal/user';
+   //private userUrl = 'http://localhost:8080/user-portal/user';
   private userUrl = 'http://localhost:7070';
   constructor(private http: HttpClient) { }
 
@@ -23,17 +23,24 @@ export class TaskService {
   }
 
   public addTask(task) {
-    return this.http.post<Task>(this.userUrl+'/addTask', task);
+    return this.http.post<Task>(this.userUrl+'/task', task);
   }
 
   public viewTask() {
-    return this.http.get<Task[]>(this.userUrl+'/viewTask');
-  }
-  public updateTask(task,taskId){
-    return this.http.put<string>(this.userUrl+'/editTask/'+taskId,task);
+    return this.http.get<Task[]>(this.userUrl+'/tasks');
   }
 
-  public endTask(taskId){
+  public getTasksByProjectId(projectId) {
+    return this.http.get<Task[]>(this.userUrl+'/tasksByProject/'+projectId);
+  }
+
+  public updateTask(task,taskId){
+    return this.http.post<Task>(this.userUrl+'/editTask/',task);
+  }
+  public getAllParentTasks() {
+    return this.http.get<ParentTask[]>(this.userUrl+'/getParentTask');
+  }
+  public endTask(task,taskId){
     console.log(taskId);
     
     return this.http.delete<Task[]>(this.userUrl+'/endTask/'+taskId);

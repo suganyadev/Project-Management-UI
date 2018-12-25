@@ -10,7 +10,11 @@ export class TaskVO {
     public status: string;
     public projectId: number;
     public employeeId: number;
-
+    public userId: number;
+    public parentTaskInd: boolean;
+    public projectName:String;
+    public firstName: String;
+    public lastName: String;
 
 
 }
