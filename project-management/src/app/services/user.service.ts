@@ -22,6 +22,10 @@ export class UserService {
     return this.http.get<User[]>(this.userUrl+'/getAllUsers');
   }
 
+  public getManagers() {
+    return this.http.get<User[]>(this.userUrl+'/getAllEmployees');
+  }
+
   public addTask(task) {
     return this.http.post<Task>(this.userUrl+'/addTask', task);
   }

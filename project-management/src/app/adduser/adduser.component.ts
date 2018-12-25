@@ -17,7 +17,7 @@ export class AdduserComponent implements OnInit {
   constructor(private router: Router,private taskervice: TaskService) {
     taskervice.getAllUsers().subscribe((data :any) => {
       this.userList = data;
-      this.intermittentList=data;
+      this.intermittentList = data;
     });
    }
 
@@ -25,9 +25,10 @@ export class AdduserComponent implements OnInit {
     this.taskervice.getAllUsers()
         .subscribe( data => {
           this.userList = data;
+          this.intermittentList = data;
         },
         error => {
-        // alert("ERROR");
+         alert("ERROR");
        });
  };
 
@@ -74,6 +75,7 @@ export class AdduserComponent implements OnInit {
            this.user.firstName='';
            this.user.lastName='';
            this.user.searchText='';
+           this.user.employeeId='';
            //call reset 
 
            this.getAllUsers();

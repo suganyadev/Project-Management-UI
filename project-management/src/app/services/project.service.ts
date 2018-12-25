@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import { Task } from '../addtask/task';
 import { User } from '../addUser/user';
-
+import { Project } from '../project/project';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -14,12 +14,12 @@ export class ProjectService {
     private userUrl = 'http://localhost:7070';
     constructor(private http: HttpClient) { }
   
-    public addProject(user){
-      return this.http.post<User>(this.userUrl+'/createProject', user);
+    public createProject(project){
+      return this.http.post<Project>(this.userUrl+'/createProject', project);
     }
 
     public getAllProjects() {
-        return this.http.get<User[]>(this.userUrl+'/getAllProjects');
+        return this.http.get<Project[]>(this.userUrl+'/getAllProjects');
       }
 
 }

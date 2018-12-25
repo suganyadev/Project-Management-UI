@@ -8,11 +8,14 @@ import { RouterModule, Routes } from '@angular/router';
 import {UpdateComponent} from './update/update.component';
 import { AdduserComponent } from './adduser/adduser.component';
 import {ProjectComponent} from './project/project.component';
+
 const appRoutes: Routes = [
   { path: 'addUser', component: AdduserComponent },
-  { path: 'addProject', component: ProjectComponent },
-  { path: 'addTask', component: AddtaskComponent },
-  { path: '',   redirectTo: '/addUser', pathMatch: 'full' },
+  { path: 'addProject', component: ProjectComponent }, 
+  { path: 'addtask', component: AddtaskComponent },
+  { path: 'viewtask', component: ViewtaskComponent },
+  { path: 'updateTask', component: UpdateComponent },
+  { path: '',   redirectTo: '/addtask', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 

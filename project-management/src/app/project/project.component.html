@@ -1,3 +1,4 @@
+ 
 <div class="container">
     <div class="row">
     <div class="col-md-12">
@@ -50,20 +51,23 @@
               </div>
                <!-- Modal body -->
             <div class="modal-body" style="height:450px; overflow-y: scroll">
-                    <div class="row list-group-item" *ngFor="let item of usersList">
+                    <div class="row list-group-item" *ngFor="let item of userList">
                             
                             <div class="col-md-12" style="background-color: rgb(228, 224, 224);"  >
                                 <br/><strong>
-                                <span class="col-form-label"><button type="button" class="btn btn-primary" (click)=selectedUser(item)> Employee Id: {{item.employeeId}}</button></span><br/>
+                            <div>   
+                                <span class="col-form-label"><button type="button" class="btn btn-primary" (click)=selectManager(item)> Employee Id: {{item.employeeId}}</button></span><br/>                            
+                               <!--  <span class="col-form-label"> Employee Id: {{item.employeeId}}</span><br/> -->
                                 <span class="col-form-label">First Name: {{item.firstName}}</span><br/>
                                 <span class="col-form-label">Last Name: {{item.lastName}}</span><br/><br/>
+                            </div>
                               </strong>
                             </div>
                             
                         </div>  
                 </div>
              
-              <div class="modal-footer">
+            <div class="modal-footer">
                 <button id="modalClose" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               </div>
             </div>
@@ -75,7 +79,7 @@
     <div class="row">
         <div class="col-md-5"></div>
       <div class="col-md-2">
-      <button type="submit" class="btn btn-success" (click)="addProject()">Add</button>  
+      <button type="submit" class="btn btn-success" (click)="createProject()">Add</button>  
       </div>
       <div class="col-md-2">
       <button type="reset" id="reset" class="btn btn-primary">Reset</button>
@@ -128,14 +132,14 @@
             <div class="col-sm-1"></div>
         <div class="list-group col-md-8">
           
-            <div class="row list-group-item" *ngFor="let item of projectList | ProjectPipe : searchText">
+            <div class="row list-group-item" *ngFor="let item of projectsList | ProjectPipe : searchText">
                 
                 <div class="col-md-9" style="align-content:left;background-color: rgb(228, 224, 224);"  >
                     <br/><strong>
                             <table class="table table-borderless">
                                     <tbody>
                                         <tr>
-                                            <td>Project:       {{item.projectName}}</td>
+                                            <td>Project:       {{item.project}}</td>
                                         </tr>
                                         <tr>
                                             <td>No. of Tasks:</td>
@@ -145,9 +149,9 @@
                                         </tr>
                                         <tr>
                                             <td>Start Date:</td>
-                                            <td>{{item.startDate}}</td>
+                                            <td>{{item.startDate | date : "dd/MM/yyyy"}}</td>
                                             <td>End Date:</td>
-                                            <td>{{item.endDate}}</td>
+                                            <td>{{item.endDate | date : "dd/MM/yyyy"}}</td>
                                         </tr>
                                         <tr>
                                             <td>Priority:</td>
@@ -161,7 +165,7 @@
                 </div>
                 <div class="col-md-3">
                             <br/><br/>
-                            <span><button type="button" class="btn btn-info" (click)=update(item)>Update</button></span><br/> <br/>
+                            <span><button type="button" class="btn btn-info" (click)=updateProject(item)>Update</button></span><br/> <br/>
                             
                             <div *ngIf="item.status != 'Completed'">
                             <span><button type="button" class="btn btn-secondary" style="margin:top" (click)=suspend(item)>Suspend</button></span>
@@ -177,16 +181,16 @@
   <div class="modal fade" role="dialog" id="popUpDiv" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
-          <!-- Modal Header -->
+          
           <div class="modal-header">
             <h4 class="modal-title">{{popUpHeader}}</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
-          <!-- Modal body -->
+          
           <div class="modal-body">
             {{popUpContent}}
           </div>
-          <!-- Modal footer -->
+            
           <div class="modal-footer">
             <button type="button" class="btn btn" data-dismiss="modal" (click)=resetButton()>Go To Add Project</button>
           </div>

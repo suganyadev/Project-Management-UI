@@ -1,5 +1,5 @@
 import {SearchCriteria} from '../services/search.criteria';
-
+import {Project} from '../project/project';
 
 export class User {
     public firstName:string;
@@ -11,4 +11,5 @@ export class User {
     public errorFirstName:string;
     public errorLastName:string;
     public errorEmployeeId:string;
+    public project:Project;
 }

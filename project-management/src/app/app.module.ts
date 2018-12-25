@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { AddtaskComponent } from './addtask/addtask.component';
 import { ViewtaskComponent } from './viewtask/viewtask.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-
+import { DatePipe } from '@angular/common'
 import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { TaskService } from './services/task.service';
@@ -22,6 +22,7 @@ import { ProjectComponent } from './project/project.component';
 import {ProjectService} from './services/project.service';
 import {UserService} from './services/user.service';
 import {ProjectPipe} from './project/project.pipe';
+import {NgbdModalFocus} from './project/model.focus';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +35,8 @@ import {ProjectPipe} from './project/project.pipe';
     AdduserComponent,
     UserPipe,
     ProjectComponent,
-    ProjectPipe
+    ProjectPipe,
+    NgbdModalFocus
   ],
   imports: [
     BrowserModule,
@@ -45,9 +47,10 @@ import {ProjectPipe} from './project/project.pipe';
     MatDatepickerModule,
     MatNativeDateModule,
     BrowserAnimationsModule
+    
   ],
   exports:[TaskPipe,SearchPipe,UserPipe,ProjectPipe],
-  providers: [TaskService,UserService,ProjectService],
+  providers: [TaskService,ProjectService,UserService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

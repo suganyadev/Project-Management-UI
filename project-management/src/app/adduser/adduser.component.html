@@ -1,7 +1,7 @@
 <div class="container">
-    <!-- <div class="row">
-  <h4>Add User</h4>
-  </div> -->
+      <div class="row">
+  <h1>Add User</h1>
+  </div> 
   <form>
     <div class="row">
       <label for="firstName"  class="col-sm-3 col-md-3 col-lg-3 col-xs-3" >First Name</label>
@@ -30,14 +30,14 @@
         {{user.errorEmployeeId}}
       </div>
   </div>
- 
+  <div class="row">
   <div class="col-sm-3 col-md-3 col-lg-9 col-xs-3">
-  <br>
+    <br>
     <button type="submit" class="btn btn-success" (click)="addUser()">Add</button> 
-     <button type="reset" class="btn btn-success">Reset</button>
+    <button type="reset" class="btn btn-success">Reset</button>
     <br>
   </div>
-
+</div>
   <hr>
 
   <form #viewUsersForm="ngForm" novalidate >
@@ -47,7 +47,7 @@
           <div class="col-sm-2">
               <input type="text" class="form-control" id="searchText" name="searchText" #searchProjects="ngModel" [(ngModel)]="searchText" placeholder="Search User">
           </div>
-          <div class="col-sm-2">
+          <div class="col-sm-1">
               <label class="col-form-label">Sort:</label>
           </div>
           <div class="col-sm-2">
@@ -56,10 +56,10 @@
           <div class="col-sm-2">
               <button type="button" class="btn btn-secondary" (click)=sortByLastName()>Last Name</button>
           </div>
-          <div class="col-sm-2">
+          <div class="col-sm-1">
               <button type="button" class="btn btn-secondary" (click)=sortByEmployeeId()>Employee Id</button>
-          </div>
-          <div class="col-sm-2">
+          </div> 
+          <div class="col-sm-1">
 
           </div>
           <div class="col-sm-2">
@@ -68,25 +68,28 @@
       </div>
       <div class="row">
           <div class="col-sm-2"></div>
-      <div class="list-group col-md-12">
+        <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="list-group col-md-12">
         
-          <div class="row list-group-item" *ngFor="let item of userList | UserFilter : searchText">
+                 <div class="row list-group-item" *ngFor="let item of userList | UserFilter : searchText">
               
-              <div class="col-sm-12" style="background-color: rgb(228, 224, 224);"  >
-                  <br/><strong>
-                  <span class="col-form-label">Employee Id: {{item.employeeId}}</span><br/>
-                  <span class="col-form-label">First Name: {{item.firstName}}</span><br/>
-                  <span class="col-form-label">Last Name: {{item.lastName}}</span><br/><br/>
-                </strong>
-              </div>
-              <div class="col-md-3">
+                     <div class="col-sm-12" style="background-color: rgb(228, 224, 224);"  >
+                        <br/><strong>
+                        <span class="col-form-label">Employee Id: {{item.employeeId}}</span><br/>
+                        <span class="col-form-label">First Name: {{item.firstName}}</span><br/>
+                        <span class="col-form-label">Last Name: {{item.lastName}}</span><br/><br/>
+                        </strong>
+                     </div>
+                     <div class="col-md-3">
                       <div *ngIf="item.status === 'A'">
                           <span><button type="button" class="btn btn-info" (click)=editUser(item)>Edit User</button></span><br/> <br/>
                           <span><button type="button" class="btn btn-secondary" style="margin:top" (click)=deleteUser(item)>Delete User</button></span>
                       </div>
-              </div>
-          </div>
-        </div>
+                    </div>
+                </div>
+            </div>
+        </div></div>
       </div>
 </div>
       </div>
