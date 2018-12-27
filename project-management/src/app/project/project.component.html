@@ -1,4 +1,6 @@
- 
+  <div class="row">
+  <h1>{{title}}</h1>
+  </div> 
 <div class="container">
     <div class="row">
     <div class="col-md-12">
@@ -79,7 +81,7 @@
     <div class="row">
         <div class="col-md-5"></div>
       <div class="col-md-2">
-      <button type="submit" class="btn btn-success" (click)="createProject()">Add</button>  
+      <button type="submit" class="btn btn-success" (click)="createProject()">{{updateBtn?"Update":"Add"}}</button>  
       </div>
       <div class="col-md-2">
       <button type="reset" id="reset" class="btn btn-primary">Reset</button>
@@ -139,26 +141,23 @@
                             <table class="table table-borderless">
                                     <tbody>
                                         <tr>
-                                            <td>Project:       {{item.project}}</td>
+                                            <td colspan="4" style="text-align:left;">Project:       {{item.project}}</td>
+                                            <td colspan="4" style="text-align:left;">Priority:</td>
+                                            <td>{{item.priority}}</td>
                                         </tr>
                                         <tr>
                                             <td>No. of Tasks:</td>
                                             <td>{{item.noOfTask}}</td>
-                                            <td>Status:</td>
-                                            <td>{{item.status}}</td>
+                                            <td >Status:</td>
+                                            <td colspan="4" style="text-align:left;">{{item.status}}</td>
                                         </tr>
                                         <tr>
                                             <td>Start Date:</td>
                                             <td>{{item.startDate | date : "dd/MM/yyyy"}}</td>
                                             <td>End Date:</td>
-                                            <td>{{item.endDate | date : "dd/MM/yyyy"}}</td>
+                                            <td colspan="4" style="text-align:left;">{{item.endDate | date : "dd/MM/yyyy"}}</td>
                                         </tr>
-                                        <tr>
-                                            <td>Priority:</td>
-                                            <td>{{item.priority}}</td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
+                                        
                                     </tbody>
                                 </table>
                   </strong>
@@ -183,16 +182,16 @@
         <div class="modal-content">
           
           <div class="modal-header">
-            <h4 class="modal-title">{{popUpHeader}}</h4>
+            <h4 class="modal-title"><b>{{popUpHeader}}</b></h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           
-          <div class="modal-body">
+          <div class="modal-body" style="color:red;">
             {{popUpContent}}
           </div>
             
           <div class="modal-footer">
-            <button type="button" class="btn btn" data-dismiss="modal" (click)=resetButton()>Go To Add Project</button>
+            <button type="reset" class="btn btn" data-dismiss="modal">OK</button>
           </div>
         </div>
       </div>

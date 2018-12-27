@@ -13,4 +13,5 @@ export  class Project{
     public firstName:string;
     public lstName:string;
     public hasSetDefaultDate:boolean;
+    public errorMessage:String;
 }

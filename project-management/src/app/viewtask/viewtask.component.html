@@ -1,4 +1,7 @@
 <form #viewProjectForm="ngForm" novalidate>
+        <div class="row">
+                <h1>{{title}}</h1>
+                </div>
     <div class="container">
         <div class="row">
             <div class="form-group row">
@@ -9,7 +12,7 @@
                         <input type="text" class="form-control" id="searchProject" name="searchProject" #searchProject="ngModel" [(ngModel)]="searchProjects" placeholder="Search Project">    
                     </div>
                 <div class="col-md-3">
-                    <button type="button" class="col-sm-4  btn btn-danger" style="border-radius: 45%;" (click)=getProjectPopup()>Search</button>
+                    <button type="button" class="col-sm-4  btn btn" style="border-radius: 45%;" (click)=getProjectPopup()>Search</button>
                 </div>
                 <button type="button" id="projectModalhide" class="btn btn-primary" style="display: none;" data-toggle="modal" data-target="#projectModal"></button>
             </div>
@@ -110,7 +113,7 @@
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)=resetButton()>Back To View Task</button>
+          <button type="button" class="btn btn" data-dismiss="modal" (click)=resetButton()>Back To View Task</button>
         </div>
       </div>
     </div>

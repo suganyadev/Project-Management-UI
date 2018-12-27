@@ -6,7 +6,7 @@ import {Project} from './project';
 @Injectable()
 export class ProjectPipe implements PipeTransform{
     transform(userList:Project[],field:string): Project[] {
-       console.log(field + "field --->"+field)
+       
     
        if (userList && userList.length){
         return userList.filter(item =>{

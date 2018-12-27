@@ -12,6 +12,7 @@ import {ProjectService} from '../services/project.service';
 })
  
 export class ViewtaskComponent implements OnInit{
+  title:String="View Task";
   project : any = [];
   projectsList : any = [];
   alltaskList : any = [];
@@ -84,13 +85,10 @@ endTask(task : any){
  ngOnInit() {
   //this.viewTask();
  }
-
+ 
  getProjectPopup(){
 
-    this.projectService.getAllProjects().subscribe((data :any) => {
-      this.projectsList = data;
-      console.log(this.projectsList);
-    });
+  
 
     /* console.log(this.tempProjectsList);
     for ( var i = 0; i < this.tempProjectsList.length; i++)
@@ -99,21 +97,25 @@ endTask(task : any){
         this.projectsList.push(this.tempProjectsList[i]);
       }
     } */
-    console.log(this.projectsList);
-    if(this.projectsList.length ===0){
-      this.modalHeading = 'Error!!!';
-      this.modalBody = 'No Project found. Please try again.';
-      document.getElementById("submitModalhide").click();  
-      }else{
-    document.getElementById("projectModalhide").click();
-    }
+    this.projectService.getAllProjects().subscribe((data :any) => {
+      this.projectsList = data;
+      if(this.projectsList.length ===0){
+        this.modalHeading = 'Error!!!';
+        this.modalBody = 'No Project found. Please try again.';
+        document.getElementById("submitModalhide").click();  
+        }else{
+           document.getElementById("projectModalhide").click();
+      }
+      console.log(this.projectsList);
+    });
+   
  }
  
  selectedProject(item : any){
   console.log(item);
   var projectId=item.projectId;
   this.projectName=item.project;
-  
+  this.searchProjects = item.project;
 
   if(projectId !== undefined && projectId !== null && projectId !== ''){
     console.log("alltaskList");

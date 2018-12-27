@@ -18,6 +18,7 @@ import {SearchPipe} from './services/search.pipe';
 import { UpdateComponent } from './update/update.component';
 import { AdduserComponent } from './adduser/adduser.component';
 import {UserPipe} from './adduser/user.pipe';
+import {OrderBy} from './adduser/orderby.pipe';
 import { ProjectComponent } from './project/project.component';
 import {ProjectService} from './services/project.service';
 import {UserService} from './services/user.service';
@@ -37,7 +38,8 @@ import {EditTaskService} from './services/edittask.service';
     UserPipe,
     ProjectComponent,
     ProjectPipe,
-    NgbdModalFocus
+    NgbdModalFocus,
+    OrderBy
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,7 @@ import {EditTaskService} from './services/edittask.service';
     BrowserAnimationsModule
     
   ],
-  exports:[TaskPipe,SearchPipe,UserPipe,ProjectPipe],
+  exports:[TaskPipe,SearchPipe,UserPipe,ProjectPipe,OrderBy],
   providers: [EditTaskService,TaskService,ProjectService,UserService,DatePipe],
   bootstrap: [AppComponent]
 })

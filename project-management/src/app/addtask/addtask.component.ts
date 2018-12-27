@@ -13,6 +13,7 @@ import {UserService} from '../services/user.service';
   styleUrls: ['./addtask.component.css']
 })
 export class AddtaskComponent implements OnInit {
+  title:String="Add Task";
   task: TaskVO = new TaskVO();
   projectsList : any = [];
   tempProjectsList : any = [];

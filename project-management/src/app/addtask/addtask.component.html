@@ -1,3 +1,6 @@
+<div class="row">
+  <h1>{{title}}</h1>
+  </div>
 <div class="container">
   <div class="row">
   <div class="col-md-12">
@@ -7,7 +10,7 @@
       <div class="row">
           <label for="projectName" class="col-md-4">Project:</label>
           <input type="text" class="col-md-5" id="searchProject" name="searchProject" #searchProject="ngModel" [(ngModel)]="projectName" placeholder="Search Project">    
-          <button type="button" class="col-md-1  btn btn-danger" style="border-radius: 45%;margin-left:20px" (click)=getProjectPopup()>Search</button>
+          <button type="button" class="col-md-1  btn btn" style="border-radius: 45%;margin-left:20px" (click)=getProjectPopup()>Search</button>
       </div>
       <br>  
     <div class="row">
@@ -26,13 +29,13 @@
     <div class="row">
         <label for="task"  class="col-md-4" >Priority</label>
         <input class="col-sm-2" type="range"  [(ngModel)]="task.priority" [disabled] = "checkBoxSelect" title="{{task.priority}}" name="priority" id="priority" required>
-        <label for="task"  class="col-md-1" >{{task.priority}}</label>
+        <label for="task"  class="col-md-1" ></label>
     </div>
       <br>
     <div class="row">
       <label for="parentTask" class="col-md-4" >Parent Task</label>
       <input class="col-md-5" type="text" [disabled] = "checkBoxSelect"  [(ngModel)]="task.parentTaskName"   name="parentName" id="parentName" required>
-      <button [disabled] = "checkBoxSelect" type="button" class="col-md-1  btn btn-danger" style="border-radius: 45%;margin-left:20px" (click)=getParentPopup()>Search</button>
+      <button [disabled] = "checkBoxSelect" type="button" class="col-md-1  btn btn" style="border-radius: 45%;margin-left:20px" (click)=getParentPopup()>Search</button>
     </div>
     <br>
     <div class="row">
@@ -47,7 +50,7 @@
       <label for="user" class="col-md-4" >User:</label>
       <input class="col-md-5" type="text" [(ngModel)]="userName"   name="userName" id="userName" required>
 
-      <button type="button" class="col-md-1  btn btn-danger"  style="border-radius: 45%;margin-left:20px" (click)=getUserPopup()>Search</button>
+      <button type="button" class="col-md-1  btn btn"  style="border-radius: 45%;margin-left:20px" (click)=getUserPopup()>Search</button>
     </div>
   <br>
   <br>
@@ -89,7 +92,7 @@
                       <br/>
                       <strong>
                           <span class="col-form-label">
-                              <button type="button" class="btn btn-primary" (click)=selectedProject(item)> Project Name: {{item.project}}</button>
+                              <button type="button" class="btn btn-primary" (click)=selectedProject(item)>  {{item.project}}</button>
                           </span>
                           <br/>
                       </strong>
@@ -186,7 +189,7 @@
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="reset" class="btn btn-danger" data-dismiss="modal" (click)=resetButton()>Back to Add Task</button>
+          <button type="reset" class="btn btn" data-dismiss="modal" (click)=resetButton()>OK</button>
         </div>
       </div>
     </div>

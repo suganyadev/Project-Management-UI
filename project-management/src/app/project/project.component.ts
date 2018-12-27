@@ -13,7 +13,7 @@ import { DatePipe } from '@angular/common'
 })
 export class ProjectComponent implements OnInit {
   hasSetDefaultDate:boolean;
-
+  title:string="Add Project";
   project : any = {};
   user : any = {};
   projectsList : any = [];
@@ -23,6 +23,7 @@ export class ProjectComponent implements OnInit {
   popUpHeader : string = 'Select the manager';
   popUpContent : string = '';
   searchText:string ='';
+  updateBtn:boolean=false;
 
   constructor(public datepipe: DatePipe,private router: Router,private projectService: ProjectService,private userService: UserService) {
     this.project = {
@@ -34,30 +35,40 @@ export class ProjectComponent implements OnInit {
     };
 
     userService.getAllUsers().subscribe((data :any) => {
-      console.log("cd");
+      
       this.userList = data;
       this.intermittentUserList=data;
     });
     projectService.getAllProjects().subscribe((data :any) => {
-      console.log("cdd")+data;
+     
       this.projectsList = data;
       this.intermittentProjectList = data;
     });
 
    }
    createProject():void{
-    console.log(this.project);
-    this.project.status='Open';
-   if(!this.hasSetDefaultDate){
-     this.project.startDate = new Date();
-     this.project.endDate = new Date();
-   }
-    if(this.project.projectName != '' && this.project.employeeName !='' && this.project.employeeId!=''){
-      this.projectService.createProject(this.project)
+        
+    this.project.errorMessage='';
+    if(null!=this.project && this.project.projectName != '' && this.project.employeeName !='' && this.project.employeeId!=''){
+      this.project.status='Open';
+    if(!this.hasSetDefaultDate){
+      this.project.startDate = new Date();
+      this.project.endDate = new Date();
+    }else{
+      if(new Date(this.project.startDate)>new Date(this.project.endDate)){
+        this.project.errorMessage='End Date cant before start date';
+     }
+    }
+    if(this.project.errorMessage==''){
+       this.project.startDate= new Date(this.project.startDate);
+        this.project.endDate =new Date(this.project.endDate);
+
+    this.projectService.createProject(this.project)
         .subscribe( (data: any) => {
           if(data){
             this.popUpHeader = 'Note:';
-            this.popUpContent = 'User saved Successfully'
+            this.popUpContent = 'Project saved Successfully'
+            this.updateBtn=false;
             document.getElementById("popUpBtn").click();  
             document.getElementById("reset").click();  
             this.ngOnInit();
@@ -66,18 +77,30 @@ export class ProjectComponent implements OnInit {
             this.popUpHeader = 'Error!!!';
             this.popUpContent = 'error occured on Adding Use. Please try again.';
             document.getElementById("popUpBtn").click();  
+            this.updateBtn=false;
             this.ngOnInit();
           }
         },
-        error => {alert("Error in creating Project");});
+        error => {
+          this.popUpHeader = 'Note:';
+          this.popUpContent = 'Project saved successfully'
+          document.getElementById("popUpBtn").click();  
+          document.getElementById("reset").click();  
+          this.updateBtn=false;
+          this.ngOnInit();
+        });
     }else{
       console.log('submitModal');
       this.popUpHeader = 'Alert';
-      this.popUpContent = 'Please fill all required values';
-      document.getElementById("submitModalhide").click(); 
+      if(this.project.errorMessage!=''){
+        this.popUpContent = this.project.errorMessage;
+      }else{
+        this.popUpContent = 'Please fill all mandatory fields';
+      }document.getElementById("popUpBtn").click(); 
     }
-    this.ngOnInit();
-    console.log(this.project.status);
+    //this.ngOnInit();
+    
+  }
    }
   ngOnInit() {
 
@@ -87,15 +110,21 @@ export class ProjectComponent implements OnInit {
       "project":"",
       "priority":"1",
       "employeeName":"",
-      "employeeId":""
+      "employeeId":"",
+       
     };
   }
 
   showUserPopUp(){
    // this.project.employeeId='';
-    this.userList = [];
-    if(this.intermittentUserList.length>0){
-    for ( var i = 0; i < this.intermittentUserList.length; i++)
+    //this.userList = [];
+    this.userService.getAllUsers().subscribe((data :any) => {
+      
+      this.userList = data;
+     
+    });
+     if(this.userList.length>0){
+    /*for ( var i = 0; i < this.intermittentUserList.length; i++)
     {
       console.log("intermittentUserList"+this.intermittentUserList[i].employeeId);
       if(this.intermittentUserList[i].employeeId.indexOf(this.project.employeeId) > -1){
@@ -105,7 +134,7 @@ export class ProjectComponent implements OnInit {
       }else if(this.intermittentUserList[i].lastName.toLowerCase().indexOf(this.project.employeeName.toLowerCase()) > -1){
         this.userList.push(this.intermittentUserList[i]);
       }
-    }
+    } */
     if(this.userList.length ===0){
       this.popUpHeader = 'Error!!!';
       this.popUpContent = 'No users found. Please try again.';
@@ -122,12 +151,9 @@ export class ProjectComponent implements OnInit {
 
   }
   }
-
-  selectManager1(){
-    console.log("in selec manager ");
-  }
+ 
   selectManager(user : any){
-    console.log("in selec manager 1");
+    
     this.project.employeeName = user.firstName+' '+user.lastName;
     this.project.employeeId=user.employeeId;
     this.project.userId = user.userId;
@@ -153,21 +179,22 @@ export class ProjectComponent implements OnInit {
       "endDate": project.endDate,
       "priority":project.priority,
       "status":project.status,
-      "employeeId": project.employeeId
+      "employeeId": project.employeeId,
+      
     };
     this.projectService.createProject(this.project)
     .subscribe( (data: any) => {
       if(data){
         this.popUpHeader = 'Note:';
         this.popUpContent = 'User saved Successfully'
-        document.getElementById("submitModalhide").click();  
+        document.getElementById("popUpBtn").click();  
         document.getElementById("reset").click();  
         this.ngOnInit();
       }
       else{
         this.popUpHeader = 'Error!!!';
         this.popUpContent = 'error occured on Adding Use. Please try again.';
-        document.getElementById("submitModalhide").click();  
+        document.getElementById("popUpBtn").click();  
         this.ngOnInit();
       }
     });
@@ -184,17 +211,19 @@ export class ProjectComponent implements OnInit {
     }
     var managerName = '';
     var managerId = '';
-    if(manager.status === 'A'){
-      managerName = manager.lastName + ', ' + manager.firstName;
+    if(manager.status === 'Active'){
+      managerName =  manager.firstName + ' ' +manager.lastName;
       managerId = manager.employeeId; 
+      this.updateBtn=true;
     }
-    console.log( this.datepipe.transform(project.startDate, 'yyyy-MM-dd'));
-
+    var d =this.datepipe.transform(project.startDate, 'MM/dd/yyyy');
+    console.log(d+ "\n"+project.startDate + "\n"+ this.datepipe.transform(d, 'mm/dd/yyyy'));
+// /this.datepipe.transform(project.endDate, 'mm/dd/yyyy'),
     this.project = {
       "projectId":project.projectId,
       "project":project.project,
-      "startDate":  this.datepipe.transform(project.startDate, 'mm/dd/yyyy'),
-      "endDate":  this.datepipe.transform(project.endDate, 'mm/dd/yyyy'),
+      "startDate":this.datepipe.transform(project.startDate, 'MM/dd/yyyy'),
+      "endDate":this.datepipe.transform(project.endDate, 'MM/dd/yyyy'),
       "priority":project.priority,
       "status":project.status,
       "employeeId": managerId,

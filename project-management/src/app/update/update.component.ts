@@ -84,7 +84,10 @@ export class UpdateComponent implements OnInit {
  }
 
   updateTask(): void {
-    console.log(this.task);
+    console.log(this.task );
+    if(!this.task.priority){
+      this.task.priority =1;
+    }
     if(this.task.taskName !== '' ){
       this.taskService.updateTask(this.task,this.task.taskId)
       .subscribe( (data: any) => {
@@ -96,9 +99,8 @@ export class UpdateComponent implements OnInit {
         }
       }); 
     }else{
-      console.log('submitModal');
       this.modalHeading = 'Alert';
-      this.modalBody = 'Please fill all required values';
+      this.modalBody = 'Please enter mandatory fields';
       document.getElementById("submitModalhide").click(); 
     }
   }

@@ -18,6 +18,10 @@ export class TaskService {
   public addUser(user){
     return this.http.post<User>(this.userUrl+'/addUser', user);
   }
+
+  public deleteUser(userId){
+    return this.http.delete<String>(this.userUrl+'/users/'+userId);
+  }
   public getAllUsers() {
     return this.http.get<User[]>(this.userUrl+'/getAllUsers');
   }
